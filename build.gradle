@@ -1,0 +1,16 @@
+apply plugin: 'application'
+
+mainClassName = "com.blokaly.indy.Main"
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://repo.evernym.com/artifactory/libindy-maven-local"
+    }
+}
+
+dependencies {
+    compile 'org.hyperledger:indy:1.6.7'
+    compile 'org.json:json:20180813'
+}
