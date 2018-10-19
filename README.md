@@ -95,4 +95,4 @@ https://github.com/hyperledger/indy-sdk/blob/master/README.md
 
 https://github.com/hyperledger/indy-sdk/tree/master/wrappers/java
 
-https://github.com/hyperledger/indy-sdk/tree/master/doc/how-tos/write-did-and-query-verkey/java
+https://github.com/hyperledger/indy-sdk/tree/master/doc/how-tos
