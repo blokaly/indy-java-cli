@@ -41,20 +41,25 @@ public class WriteDIDAndQueryVerkey {
 
     Pool.setProtocolVersion(procotolVersion);
 
-    // Comment in the following line if you see this error: 'A pool ledger configuration already exists with the specified name'
-//    Pool.deletePoolLedgerConfig(poolName).get();
-
     // Step 2 code goes here.
     // Tell SDK which pool you are going to use. You should have already started
     // this pool using docker compose or similar.
     System.out.println("\n1. Creating a new local pool ledger configuration that can be used later to connect pool nodes.\n");
-    Pool.createPoolLedgerConfig(poolName, poolConfig).get();
+    try {
+      Pool.createPoolLedgerConfig(poolName, poolConfig).get();
+    } catch (Exception ex) {
+      Pool.deletePoolLedgerConfig(poolName).get();
+    }
 
     System.out.println("\n2. Open pool ledger and get the pool handle from libindy.\n");
     Pool pool = Pool.openPoolLedger(poolName, "{}").get();
 
-    System.out.println("\n3. Creates a new identity wallet\n");
-    Wallet.createWallet(walletConfig, walletCredentials).get();
+    System.out.println("\n3. Creates a new secure wallet\n");
+    try {
+      Wallet.createWallet(walletConfig, walletCredentials).get();
+    } catch (Exception ex) {
+      Wallet.deleteWallet(walletConfig, walletCredentials).get();
+    }
 
     System.out.println("\n4. Open identity wallet and get the wallet handle from libindy\n");
     Wallet walletHandle = Wallet.openWallet(walletConfig, walletCredentials).get();
